@@ -318,14 +318,14 @@ const Contact = () => {
                         <p className="text-sm text-text-muted mb-4">Or reach out directly:</p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <a
-                                href="mailto:you@email.com"
+                                href="mailto:navjotsinghaini718@email.com"
                                 className="text-text-secondary hover:text-text-primary transition-colors duration-300"
                             >
-                                you@email.com
+                                Mail me
                             </a>
                             <span className="hidden sm:inline text-text-muted">•</span>
                             <a
-                                href="https://linkedin.com/in/yourname"
+                                href="https://linkedin.com/in/navjotfrontend/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-text-secondary hover:text-text-primary transition-colors duration-300"
@@ -334,7 +334,7 @@ const Contact = () => {
                             </a>
                             <span className="hidden sm:inline text-text-muted">•</span>
                             <a
-                                href="https://twitter.com/yourusername"
+                                href="https://twitter.com/NavjotS70127790"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-text-secondary hover:text-text-primary transition-colors duration-300"
