@@ -64,7 +64,10 @@ const Contact = () => {
                 )
             } else {
                 // Fall back to backend API
-                const response = await fetch('/api/contact', {
+                // Use environment variable for API URL or default to relative path for local dev
+                const apiUrl = import.meta.env.VITE_API_URL || '/api/contact'
+
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

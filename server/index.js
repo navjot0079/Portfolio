@@ -23,9 +23,10 @@ app.use(helmet({
 }))
 
 // CORS configuration
+// Allow requests from your Vercel frontend
 app.use(cors({
     origin: process.env.NODE_ENV === 'production'
-        ? process.env.FRONTEND_URL
+        ? [process.env.FRONTEND_URL, 'https://your-portfolio.vercel.app']
         : ['http://localhost:3000', 'http://127.0.0.1:3000'],
     methods: ['GET', 'POST'],
     credentials: true,
@@ -253,38 +254,21 @@ app.get('/api/projects', (req, res) => {
     res.json({ projects })
 })
 
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
-    const distPath = path.join(__dirname, '../dist')
-    console.log('Serving static files from:', distPath)
-
-    app.use(express.static(distPath))
-
-    // Handle React routing - must be last
-    app.get('*', (req, res) => {
-        const indexPath = path.join(distPath, 'index.html')
-        console.log('Sending index.html from:', indexPath)
-        res.sendFile(indexPath, (err) => {
-            if (err) {
-                console.error('Error sending index.html:', err)
-                res.status(500).send('Error loading application')
-            }
-        })
+// 404 handler for unknown API routes
+app.use((req, res) => {
+    res.status(404).json({
+        error: 'API endpoint not found',
+        message: `Cannot ${req.method} ${req.path}`
     })
-}
+})
 
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Server error:', err)
-    res.status(500).json({
+    res.status(err.status || 500).json({
         error: 'An unexpected error occurred',
         ...(process.env.NODE_ENV !== 'production' && { details: err.message })
     })
-})
-
-// 404 handler
-app.use((req, res) => {
-    res.status(404).json({ error: 'Endpoint not found' })
 })
 
 // Start server
