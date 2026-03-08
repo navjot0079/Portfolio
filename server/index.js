@@ -255,11 +255,21 @@ app.get('/api/projects', (req, res) => {
 
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../dist')))
+    const distPath = path.join(__dirname, '../dist')
+    console.log('Serving static files from:', distPath)
 
-    // Handle React routing
+    app.use(express.static(distPath))
+
+    // Handle React routing - must be last
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../dist/index.html'))
+        const indexPath = path.join(distPath, 'index.html')
+        console.log('Sending index.html from:', indexPath)
+        res.sendFile(indexPath, (err) => {
+            if (err) {
+                console.error('Error sending index.html:', err)
+                res.status(500).send('Error loading application')
+            }
+        })
     })
 }
 

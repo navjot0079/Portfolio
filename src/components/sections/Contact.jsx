@@ -50,16 +50,33 @@ const Contact = () => {
         setStatus('loading')
 
         try {
-            await emailjs.send(
-                emailjsConfig.serviceId,
-                emailjsConfig.templateId,
-                {
-                    from_name: formData.name,
-                    from_email: formData.email,
-                    message: formData.message,
-                },
-                emailjsConfig.publicKey
-            )
+            // Use EmailJS if configured, otherwise fall back to backend API
+            if (emailjsConfig.serviceId && emailjsConfig.serviceId !== 'YOUR_SERVICE_ID') {
+                await emailjs.send(
+                    emailjsConfig.serviceId,
+                    emailjsConfig.templateId,
+                    {
+                        from_name: formData.name,
+                        from_email: formData.email,
+                        message: formData.message,
+                    },
+                    emailjsConfig.publicKey
+                )
+            } else {
+                // Fall back to backend API
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                })
+
+                if (!response.ok) {
+                    throw new Error('Failed to send message')
+                }
+            }
+
             setStatus('success')
             setFormData({ name: '', email: '', message: '' })
 
