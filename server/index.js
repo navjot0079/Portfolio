@@ -254,20 +254,13 @@ app.get('/api/projects', (req, res) => {
     res.json({ projects })
 })
 
-// 404 handler for unknown API routes
-app.use((req, res) => {
-    res.status(404).json({
-        error: 'API endpoint not found',
-        message: `Cannot ${req.method} ${req.path}`
-    })
-})
 
 // Serve React build
 app.use(express.static(path.join(__dirname, "../dist")));
 
 // React fallback route
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/index.html"));
+    res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 // Error handling middleware
@@ -276,6 +269,13 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500).json({
         error: 'An unexpected error occurred',
         ...(process.env.NODE_ENV !== 'production' && { details: err.message })
+    })
+})
+// 404 handler for unknown API routes
+app.use((req, res) => {
+    res.status(404).json({
+        error: 'API endpoint not found',
+        message: `Cannot ${req.method} ${req.path}`
     })
 })
 
