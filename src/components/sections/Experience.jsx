@@ -171,20 +171,38 @@ const Experience = () => {
                 {/* Education Section */}
                 <motion.div variants={itemVariants} className="mt-16 max-w-3xl">
                     <h3 className="text-lg font-semibold text-text-primary mb-6">Education</h3>
-                    <div className="card">
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                            <div>
-                                <h4 className="font-medium text-text-primary">
-                                    Bachelor's Degree in Computer Science
-                                </h4>
-                                <p className="text-sm text-slate">University Name</p>
+                    <div className="space-y-4">
+                        <div className="card">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                                <div>
+                                    <h4 className="font-medium text-text-primary">
+                                        Bachelor's Degree in Computer Science
+                                    </h4>
+                                    <p className="text-sm text-slate">Chitkara University</p>
+                                </div>
+                                <span className="text-xs font-mono text-text-muted">2023 — 2027</span>
                             </div>
-                            <span className="text-xs font-mono text-text-muted">2020 — 2024</span>
+                            <p className="text-sm text-text-secondary mt-3">
+                                Focused on software engineering, algorithms, and web technologies.
+                                Graduated with honors and completed multiple capstone projects.
+                            </p>
                         </div>
-                        <p className="text-sm text-text-secondary mt-3">
-                            Focused on software engineering, algorithms, and web technologies.
-                            Graduated with honors and completed multiple capstone projects.
-                        </p>
+
+                        <div className="card">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                                <div>
+                                    <h4 className="font-medium text-text-primary">
+                                        High School Diploma
+                                    </h4>
+                                    <p className="text-sm text-slate">Lord Mahavir Jain Public School</p>
+                                </div>
+                                <span className="text-xs font-mono text-text-muted">2009 — 2023</span>
+                            </div>
+                            <p className="text-sm text-text-secondary mt-3">
+                                Completed secondary education with focus on science and mathematics.
+                                Participated in various coding competitions and technical activities.
+                            </p>
+                        </div>
                     </div>
                 </motion.div>
             </motion.div>
