@@ -262,6 +262,14 @@ app.use((req, res) => {
     })
 })
 
+// Serve React build
+app.use(express.static(path.join(__dirname, "../dist")));
+
+// React fallback route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Server error:', err)
