@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 // Layout Components
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import LoadingScreen from './components/layout/LoadingScreen'
-import CustomCursor from './components/layout/CustomCursor'
+
 
 // Background
 import AnimatedBackground from './components/ui/AnimatedBackground'
@@ -20,24 +20,12 @@ import Contact from './components/sections/Contact'
 
 function App() {
     const [showLanding, setShowLanding] = useState(true)
-    const [isMobile, setIsMobile] = useState(false)
 
     const handleLandingComplete = useCallback(() => {
         console.log('Landing complete - hiding landing page')
         setShowLanding(false)
     }, [])
 
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
-        checkMobile()
-        window.addEventListener('resize', checkMobile)
-
-        return () => {
-            window.removeEventListener('resize', checkMobile)
-        }
-    }, [])
 
     return (
         <>
@@ -54,8 +42,7 @@ function App() {
                 {/* Noise overlay for texture */}
                 <div className="noise-overlay" aria-hidden="true" />
 
-                {/* Custom cursor - only on desktop */}
-                {!isMobile && <CustomCursor />}
+
 
                 {/* Main content */}
                 <motion.div
